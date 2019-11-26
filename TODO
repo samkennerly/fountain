@@ -1,10 +1,8 @@
 ASAP:
-  - delete old files
-  - finish README (see portfolio)
-  - fix links in README
-
-CODE:
-  - make fountain.py executable?
+  - should fountain.py be executable? update README.
+  - autoformat with Black
+  - run tests
+  - test links in README
 
 RELEASE:
   - GitHub social media image
