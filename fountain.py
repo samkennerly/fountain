@@ -27,9 +27,9 @@ class Fountain:
     'FizzBuzz'
     >>> soda[-3]
     'Buzz'
-    >>> soda[6_000_000_000_000_000]
+    >>> soda[6000000000000000]
     'FizzBuzz'
-    >>> soda[6_000_000_000_000_001]
+    >>> soda[6000000000000001]
     '6000000000000001'
 
     Slicing with a valid endpoint returns a tuple of strings.
@@ -121,7 +121,7 @@ class Fountain:
 
     def __repr__(self):
         """ str: Reproducible representation. """
-        return f"{type(self).__name__}(fizz={self.fizz}, buzz={self.buzz})"
+        return "{}(fizz={}, buzz={})".format(type(self).__name__, *self.shape)
 
     def __reversed__(self):
         """ Iterator[str]: Values from 0 to minus forever. """
