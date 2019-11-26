@@ -8,8 +8,7 @@ Fountain is a toy example of:
 
 - using [generators]() as [lazy]() lists
 - using [itertools]() for performance
-- [stream]() processing with limited RAM
-- writing large files to disk
+- [streaming]() infinite sequences
 - testing with [doctest]()
 
 ## basics
