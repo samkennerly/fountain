@@ -3,6 +3,9 @@ ASAP:
   - finish README (see portfolio)
   - fix links in README
 
+CODE:
+  - make fountain.py executable?
+
 RELEASE:
   - GitHub social media image
   - release 1.0.0
