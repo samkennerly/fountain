@@ -13,7 +13,6 @@ Fountain is a toy example of:
 - testing with [doctest](https://docs.python.org/3/library/doctest.html)
 - [modular arithmetic](https://en.wikipedia.org/wiki/Modular_arithmetic)
 
-
 ## basics
 
 A `Fountain` object acts like a tuple of strings, except...
@@ -31,7 +30,9 @@ A `Fountain` object acts like a tuple of strings, except...
 
 ## dependencies
 
-- Python >= 3.6
+- Python 3
+
+Tested with Python versions 3.5.9, 3.6.9, 3.7.5, 3.8.0.
 
 ## examples
 
@@ -114,7 +115,6 @@ This example is slower than calling soda[9001], but it is safe:
 >>> x
 '9001'
 ```
-
 
 ## faq
 
