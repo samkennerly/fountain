@@ -1,8 +1,5 @@
 ASAP:
-  - update README: fountain is not executable
+  - test with old Pythons
   - finish README
   - test links in README
-
-RELEASE:
-  - GitHub social media image
   - release 1.0.0

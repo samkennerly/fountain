@@ -6,7 +6,7 @@ class Fountain:
     Sliceable infinite sequence of FizzBuzz values.
     A harmless toy. Might be useful for teaching.
 
-    Create a Fountain.
+    Create a new Fountain object.
 
     >>> soda = Fountain(fizz=2, buzz=3)
     >>> soda
