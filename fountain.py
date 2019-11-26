@@ -126,3 +126,6 @@ class Fountain:
     def __reversed__(self):
         """ Iterator[str]: Values from 0 to minus forever. """
         return self(0, None, -1)
+
+
+
