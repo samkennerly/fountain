@@ -1,56 +1,56 @@
 from itertools import count
 
-FIZZ, BUZZ, START, STOP, STEP = (3, 5, 1, 101, 1)
-
-
 class Fountain:
     """
-    Sliceable infinite FizzBuzz. Mostly useless.
-    Example of using generators for lazy evaluation.
-    The classic FizzBuzz problem is described here:
+    Sliceable infinite sequence of FizzBuzz values.
+    A harmless toy. Might be useful for teaching.
 
-    https://www.tomdalling.com/blog/software-design/fizzbuzz-in-too-much-detail/
-    https://blog.codinghorror.com/why-cant-programmers-program/
-    https://imranontech.com/2007/01/24/
+    Create a Fountain.
 
-    ---- Caution ----
-
-    Never list(), tuple(), or set() a Fountain!
-    Expressions like list(forever) will never return.
-    https://en.wikipedia.org/wiki/Halting_problem
-
-    ---- Examples ----
-
-    Create a Fountain:
-    >>> soda = Fountain(fizz=2,buzz=3)
+    >>> soda = Fountain(fizz=2, buzz=3)
     >>> soda
-    Fountain(fizz=2,buzz=3)
+    Fountain(fizz=2, buzz=3)
+    >>> soda.shape
+    (2, 3)
 
-    Get values one at a time:
+    Fountain is almost a Sequence, but with one big difference:
+
+    >>> len(soda)
+    Traceback (most recent call last):
+    ...
+    ZeroDivisionError: FizzBuzz forever
+
+    Get values one at a time with square brackets.
+
     >>> soda[12]
     'FizzBuzz'
     >>> soda[-3]
     'Buzz'
     >>> soda[6_000_000_000_000_000]
     'FizzBuzz'
+    >>> soda[6_000_000_000_000_001]
+    '6000000000000001'
 
-    Slicing a Fountain returns a tuple of strings, except...
-    >>> soda[:6]
+    Slicing with a valid endpoint returns a tuple of strings.
+
+    >>> soda[ :6]
     ('FizzBuzz', '1', 'Fizz', 'Buzz', 'Fizz', '5')
-    >>> soda[-6:0]
+    >>> soda[-6 : 0]
     ('FizzBuzz', '-5', 'Fizz', 'Buzz', 'Fizz', '-1')
-    >>> soda[100:0:-13]
+    >>> soda[100 : 0 : -13]
     ('Fizz', 'Buzz', 'Fizz', '61', 'FizzBuzz', '35', 'Fizz', 'Buzz')
-    >>> soda[1_000_000_000_001:6_000_000_000_000:1_000_000_000_000]
+    >>> soda[int(1e12) + 1 : int(6e12) : int(1e12)]
     ('1000000000001', 'Buzz', '3000000000001', '4000000000001', 'Buzz')
 
-    Slicing until "the end" is not possible.
+    Slicing with no endpoint is an error.
+
     >>> soda[1:]
     Traceback (most recent call last):
     ...
     ValueError: endless slice
 
-    Calling a Fountain returns a generator:
+    Calling a Fountain returns a generator.
+
     >>> afew = soda(start=10,stop=2,step=-1)
     >>> type(afew)
     <class 'generator'>
@@ -59,43 +59,41 @@ class Fountain:
     >>> ' '.join(afew)
     ''
 
-    Calling with stop=None returns an endless generator:
+    Calling with stop=None returns an endless generator.
+
     >>> forever = soda(start=1,stop=None)
     >>> next(forever)
     '1'
     >>> [ next(forever) for x in range(5) ]
     ['Fizz', 'Buzz', 'Fizz', '5', 'FizzBuzz']
 
-    Iterating over a Fountain is possible, but be careful.
-    This loop is safe, but soda[9001] is much faster:
+    Beware of infinite loops when iterating over a Fountain.
+    Converting a Fountain to a list, set, tuple, etc. takes forever.
+    This example is slower than calling soda[9001], but it is safe:
+
     >>> for i,x in enumerate(soda):
     ...     if i > 9000:
     ...         break
     >>> x
     '9001'
-
-    This is the big difference between a Fountain and Sequence:
-    >>> len(soda)
-    Traceback (most recent call last):
-    ...
-    ZeroDivisionError: FizzBuzz forever
     """
+    __slots__ = ('fizz', 'buzz')
 
-    def __init__(self, fizz=FIZZ, buzz=BUZZ):
+    def __init__(self, fizz=3, buzz=5):
         self.fizz = int(fizz)
         self.buzz = int(buzz)
 
     shape = property(lambda self: (self.fizz, self.buzz))
 
     def __bool__(self):
-        """ bool: Hard-coded to avoid any __len__ calls. """
+        """ bool: Prevent bool() from calling __len__ and crashing. """
         return True
 
-    def __call__(self, start=START, stop=STOP, step=STEP):
+    def __call__(self, start=1, stop=101, step=1):
         """ Iterator[str]: Generate values for selected range. """
         fizz, buzz = self.fizz, self.buzz
 
-        ints = count(start, step) if stop is None else range(start, stop, step)
+        ints = count(start, step) if (stop is None) else range(start, stop, step)
         for i in ints:
             yield ("Fizz" * (not i % fizz) + "Buzz" * (not i % buzz)) or str(i)
 
@@ -121,7 +119,7 @@ class Fountain:
 
     def __repr__(self):
         """ str: Reproducible representation. """
-        return f"{type(self).__name__}(fizz={self.fizz},buzz={self.buzz})"
+        return f"{type(self).__name__}(fizz={self.fizz}, buzz={self.buzz})"
 
     def __reversed__(self):
         """ Iterator[str]: Values from 0 to minus forever. """
