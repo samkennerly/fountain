@@ -1,19 +1,8 @@
 ASAP:
-  - etc: small.json, medium.json, large.json ?
-  - finish README. link -> Docker Sandboxes tutorial
+  - delete old files
+  - finish README (see portfolio)
+  - fix links in README
+
+RELEASE:
+  - GitHub social media image
   - release 1.0.0
-
-DOCS:
-  - https://packaging.python.org/tutorials/creating-documentation/
-  - sphinx? pydoc? tox?
-  - doc/ vs docs/
-
-KITCHEN:
-  - Dockerfile build-arg in FROM? (need it for Python version)
-  - build multiple images: pydiner:latest, pydiner:3.4, ...
-  - kitchen commands must accept a tag (default 'latest')
-
-SRC:
-  - utensils: adjust for different Python versions?
-  - timeit: speed trials?
-  - mypy: type hints?
