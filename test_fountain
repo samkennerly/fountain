@@ -6,10 +6,12 @@ import doctest
 
 import fountain
 
+
 def test_fountain():
     """ None: Raise error if any doctests failed. """
     assert not doctest.testmod(fountain).failed
     print("OK fountain")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     test_fountain()

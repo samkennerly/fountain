@@ -1,5 +1,6 @@
 from itertools import count
 
+
 class Fountain:
     """
     Sliceable infinite sequence of FizzBuzz values.
@@ -77,7 +78,8 @@ class Fountain:
     >>> x
     '9001'
     """
-    __slots__ = ('fizz', 'buzz')
+
+    __slots__ = ("fizz", "buzz")
 
     def __init__(self, fizz=3, buzz=5):
         self.fizz = int(fizz)
@@ -124,6 +126,3 @@ class Fountain:
     def __reversed__(self):
         """ Iterator[str]: Values from 0 to minus forever. """
         return self(0, None, -1)
-
-
-
