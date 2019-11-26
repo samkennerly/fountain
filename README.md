@@ -2,6 +2,8 @@
 
 [FizzBuzz](https://blog.codinghorror.com/why-cant-programmers-program/) forever.
 
+![fountain](fountain.jpg)
+
 ## abstract
 
 Fountain is a toy example of:
