@@ -2,7 +2,10 @@
 
 [FizzBuzz](https://blog.codinghorror.com/why-cant-programmers-program/) forever.
 
-![fountain](fountain.jpg)
+<img
+  alt="The Fountain"
+  src="https://raw.githubusercontent.com/samkennerly/posters/master/fountain.jpeg"
+  title="Together we will live forever.">
 
 ## abstract
 
