@@ -1,43 +1,61 @@
 # fountain
 
-[FizzBuzz](https://blog.codinghorror.com/why-cant-programmers-program/) forever.
+[Pure Python] example of an infinite [FizzBuzz] which can be [sliced].
 
 <img
   alt="The Fountain"
   src="https://raw.githubusercontent.com/samkennerly/posters/master/fountain.jpeg"
   title="Together we will live forever.">
 
+[Pure Python]: https://stackoverflow.com/questions/45976946/what-is-pure-python
+[FizzBuzz]: https://blog.codinghorror.com/why-cant-programmers-program/
+[sliced]: https://docs.python.org/3/glossary.html#term-slice
+
+
 ## abstract
 
-Fountain is a toy example of:
+Fountain is an example of several Python tricks:
 
-- customizing [Sequence](https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence) methods
-- using [generators](https://docs.python.org/3/howto/functional.html#generator-expressions-and-list-comprehensions) as
-[lazy](https://en.wikipedia.org/wiki/Lazy_evaluation) tuples
-- [streaming](https://en.wikipedia.org/wiki/Stream_%28computing%29) infinite sequences
-- testing with [doctest](https://docs.python.org/3/library/doctest.html)
-- [modular arithmetic](https://en.wikipedia.org/wiki/Modular_arithmetic)
+- create a [callable] class
+- run automated tests with [doctest]
+- inherit methods from an [Abstract Base Class]
+- use [generator expressions] to do [lazy evaluation]
+
+[callable]: https://docs.python.org/3/reference/datamodel.html#object.__call__
+[doctest]: https://docs.python.org/3/library/doctest.html
+[Abstract Base Class]: https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence
+[generator expressions]: https://docs.python.org/3/howto/functional.html#generator-expressions-and-list-comprehensions
+[lazy evaluation]: https://en.wikipedia.org/wiki/Lazy_evaluation
+
 
 ## basics
 
 A `Fountain` object acts like a tuple of strings, except...
 
-- `Fountain` objects are endless and have no `len()`.
-- Negative-index elements like `[-3]` count backwards from 0.
+- `Fountain` objects have no `len()`.
+- [Calling] a `Fountain` object returns a generator.
 - Slices must have an endpoint. `[1:]` will raise an error.
-- [Calling](https://docs.python.org/3/reference/datamodel.html#object.__call__) a `Fountain` returns a generator.
+- Negative-index elements like `[-3]` count backwards from 0.
+
+[Calling]: https://docs.python.org/3/reference/datamodel.html#object.__call__
+
 
 ## contents
 
-- [fountain.py](fountain.py) is a 1-page Python
-[module](https://docs.python.org/3/tutorial/modules.html).
-- [test_fountain](test_fountain) is a test script.
+- [fountain.py] is a 1-page Python [module].
+- [test_fountain] is a test script.
+
+[fountain.py]: fountain.py
+[module]: https://docs.python.org/3/tutorial/modules.html
+[test_fountain]: test_fountain
+
 
 ## dependencies
 
 - Python 3
 
 Tested with Python versions 3.5.9, 3.6.9, 3.7.5, 3.8.0.
+
 
 ## examples
 
@@ -123,15 +141,22 @@ This example is slower than calling soda[9001], but it is safe:
 
 ## faq
 
+### Why is the docstring so long?
+
+The long [docstring] includes information [doctest] needs to run tests.
+
+[docstring]: https://peps.python.org/pep-0257/
+[doctest]: https://docs.python.org/3/library/doctest.html
+
 ### What do the `__underscores__` mean?
 
-The methods with double-underscore names are Python
-[special methods](https://docs.python.org/3/reference/datamodel.html#special-method-names). Special methods are also known as <q>magic methods</q> or <q>dunders</q>.
+The methods with double-underscore names are Python [special methods]. Special methods are also known as <q>magic methods</q> or <q>dunders</q>.
+
+[special methods]: https://docs.python.org/3/reference/datamodel.html#special-method-names
 
 ### Are all those <q>dunders</q> necessary?
 
-No. The `Fountain` class is deliberately
-[overengineered](https://www.tomdalling.com/blog/software-design/fizzbuzz-in-too-much-detail/)
-to demonstrate how
-[Sequence](https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence)
-methods work.
+No. The `Fountain` class has been [overengineered] as an example of an infinite [Sequence].
+
+[overengineered]: https://www.tomdalling.com/blog/software-design/fizzbuzz-in-too-much-detail/
+[Sequence]: https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence
