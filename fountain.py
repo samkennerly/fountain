@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from itertools import count
 
 
@@ -126,3 +128,7 @@ class Fountain:
     def __reversed__(self):
         """ Iterator[str]: Values from 0 to minus forever. """
         return self(0, None, -1)
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod(verbose=True)
