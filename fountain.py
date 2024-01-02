@@ -130,5 +130,18 @@ class Fountain:
         return self(0, None, -1)
 
 if __name__ == "__main__":
-    import doctest
-    doctest.testmod(verbose=True)
+
+    import argparse
+
+    parsed = argparse.ArgumentParser()
+    parsed.description = "Print results of the FizzBuzz game."
+    arg = parsed.add_argument
+    arg("start", nargs="?", default=0, type=int, help="start at this number")
+    arg("stop", nargs="?", default=100, type=int, help="stop before this number")
+    arg("step", nargs="?", default=1, type=int, help="slice interval")
+    arg("--fizz", default=3, type=int, help="'fizz' interval")
+    arg("--buzz", default=5, type=int, help="'buzz' interval")
+    parsed = parsed.parse_args()
+
+    fountain = Fountain(parsed.fizz, parsed.buzz)
+    print(*fountain(parsed.start, parsed.stop, parsed.step))
