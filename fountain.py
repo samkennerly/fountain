@@ -5,8 +5,7 @@ from itertools import count
 
 class Fountain:
     """
-    Sliceable infinite sequence of FizzBuzz values.
-    A harmless toy. Might be useful for teaching.
+    Infinite version of the FizzBuzz game.
 
     Create a new Fountain object.
 
@@ -90,7 +89,7 @@ class Fountain:
     shape = property(lambda self: (self.fizz, self.buzz))
 
     def __bool__(self):
-        """ bool: Prevent bool() from calling __len__ and crashing. """
+        """ bool: Default bool() would call __len__ and crash. """
         return True
 
     def __call__(self, start=1, stop=101, step=1):
@@ -114,19 +113,19 @@ class Fountain:
         return tuple(self(start, stop, step))
 
     def __iter__(self):
-        """ Iterator[str]: Values from 0 to forever. """
+        """ Iterator[str]: Endless FizzBuzz starting from 0. """
         return self(0, None, 1)
 
     def __len__(self):
-        """ None: Raise error because math.inf is not an int. """
-        raise ZeroDivisionError("FizzBuzz forever")
+        """ None: Raise error. """
+        raise ZeroDivisionError("Fountain objects have infinite length.")
 
     def __repr__(self):
         """ str: Reproducible representation. """
         return "{}(fizz={}, buzz={})".format(type(self).__name__, *self.shape)
 
     def __reversed__(self):
-        """ Iterator[str]: Values from 0 to minus forever. """
+        """ Iterator[str]: Endless FizzBuzz counting backward from 0. """
         return self(0, None, -1)
 
 if __name__ == "__main__":
