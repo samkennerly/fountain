@@ -86,8 +86,8 @@ if __name__ == "__main__":
     arg("start", nargs="?", default=1, type=int)
     arg("stop", nargs="?", default=101, type=int)
     arg("step", nargs="?", default=1, type=int)
-    arg("--fizz", default=3, type=int,help="'Fizz' multiplier (default is 3)")
-    arg("--buzz", default=5, type=int,help="'Buzz' multiplier (default is 5)")
+    arg("--fizz", default=3, type=int, help="'Fizz' multiplier (default is 3)")
+    arg("--buzz", default=5, type=int, help="'Buzz' multiplier (default is 5)")
     parsed = parsed.parse_args()
 
     fountain = Fountain(parsed.fizz, parsed.buzz)
