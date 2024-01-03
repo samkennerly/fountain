@@ -17,15 +17,18 @@
 Fountain is an example of several Python tricks:
 
 - create a [callable] class
+- run a module [as a script]
 - run automated tests with [doctest]
-- inherit methods from an [Abstract Base Class]
-- use [generator expressions] to do [lazy evaluation]
+- use [generators] to do [lazy evaluation]
 
 [callable]: https://docs.python.org/3/reference/datamodel.html#object.__call__
+[as a script]: https://docs.python.org/3/library/__main__.html#idiomatic-usage
 [doctest]: https://docs.python.org/3/library/doctest.html
-[Abstract Base Class]: https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence
-[generator expressions]: https://docs.python.org/3/howto/functional.html#generator-expressions-and-list-comprehensions
+[generators]: https://docs.python.org/3/howto/functional.html#generators
 [lazy evaluation]: https://en.wikipedia.org/wiki/Lazy_evaluation
+
+
+# UNDER CONSTRUCTION
 
 
 ## basics
@@ -42,12 +45,10 @@ A `Fountain` object acts like a tuple of strings, except...
 
 ## contents
 
-- [fountain.py] is a 1-page Python [module].
-- [test_fountain] is a test script.
+[fountain.py] is a 1-page Python [module].
 
 [fountain.py]: fountain.py
 [module]: https://docs.python.org/3/tutorial/modules.html
-[test_fountain]: test_fountain
 
 
 ## dependencies
@@ -148,15 +149,8 @@ The long [docstring] includes information [doctest] needs to run tests.
 [docstring]: https://peps.python.org/pep-0257/
 [doctest]: https://docs.python.org/3/library/doctest.html
 
-### What do the `__underscores__` mean?
+### What do the double underscores like `__call__` mean?
 
-The methods with double-underscore names are Python [special methods]. Special methods are also known as <q>magic methods</q> or <q>dunders</q>.
+Methods with double-underscore names are Python [special methods].
 
 [special methods]: https://docs.python.org/3/reference/datamodel.html#special-method-names
-
-### Are all those <q>dunders</q> necessary?
-
-No. The `Fountain` class has been [overengineered] as an example of an infinite [Sequence].
-
-[overengineered]: https://www.tomdalling.com/blog/software-design/fizzbuzz-in-too-much-detail/
-[Sequence]: https://docs.python.org/3/library/collections.abc.html#collections.abc.Sequence
