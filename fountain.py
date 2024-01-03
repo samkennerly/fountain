@@ -46,7 +46,10 @@ class Fountain:
         self.fizz = int(fizz)
         self.buzz = int(buzz)
 
-    shape = property(lambda self: (self.fizz, self.buzz))
+    @property
+    def shape(self):
+        """(int, int): Fizz and Buzz intervals."""
+        return (self.fizz, self.buzz)
 
     def __call__(self, start=1, stop=101, step=1):
         """ Generator[str]: FizzBuzz values for selected range. """
