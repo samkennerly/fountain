@@ -82,7 +82,7 @@ if __name__ == "__main__":
     import argparse
 
     parsed = argparse.ArgumentParser()
-    parsed.description = "Print numbers from [start] to [step], \
+    parsed.description = "Print numbers from [start] to [stop], \
     in steps of size [step], but for multiples of 3 print 'Fizz' \
     instead of the number, and for the multiples of 5 print 'Buzz'. \
     For numbers which are multiples of both 3 and 5 print 'FizzBuzz'."
@@ -91,8 +91,8 @@ if __name__ == "__main__":
     arg("start", nargs="?", default=1, type=int)
     arg("stop", nargs="?", default=101, type=int)
     arg("step", nargs="?", default=1, type=int)
-    arg("--fizz", default=3, type=int, help="'Fizz' multiplier (default is 3)")
-    arg("--buzz", default=5, type=int, help="'Buzz' multiplier (default is 5)")
+    arg("--fizz", default=3, type=int, help="Fizz multiplier (default is 3)")
+    arg("--buzz", default=5, type=int, help="Buzz multiplier (default is 5)")
     parsed = parsed.parse_args()
 
     fountain = Fountain(parsed.fizz, parsed.buzz)
