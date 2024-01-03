@@ -66,7 +66,7 @@ class Fountain:
 
     def __repr__(self):
         """ str: Reproducible representation. """
-        return "{}(fizz={}, buzz={})".format(type(self).__name__, *self.shape)
+        return f"{type(self).__name__}(fizz={self.fizz}, buzz={self.buzz})"
 
 
 if __name__ == "__main__":
