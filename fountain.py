@@ -52,7 +52,7 @@ class Fountain:
         return (self.fizz, self.buzz)
 
     def __call__(self, start=1, stop=101, step=1):
-        """ Generator[str]: FizzBuzz values for selected range. """
+        """Generator[str]: FizzBuzz values for selected range."""
         fizz = self.fizz
         buzz = self.buzz
 
@@ -65,12 +65,11 @@ class Fountain:
             yield ("Fizz" * (not n % fizz) + "Buzz" * (not n % buzz)) or str(n)
 
     def __repr__(self):
-        """ str: Reproducible representation. """
+        """str: Reproducible representation."""
         return f"{type(self).__name__}(fizz={self.fizz}, buzz={self.buzz})"
 
 
 if __name__ == "__main__":
-
     import argparse
 
     parsed = argparse.ArgumentParser()
