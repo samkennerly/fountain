@@ -22,26 +22,31 @@ class Fountain:
     ['FizzBuzz', '1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz']
 
     Call with step=3 to generate only every 3rd result:
-    >>> thirds = f(start=0, stop=15, step=3)
-    >>> list(thirds)
+    >>> list(f(start=0, stop=15, step=3))
     ['FizzBuzz', 'Fizz', 'Fizz', 'Fizz', 'Fizz']
 
     Call with step < 0 to generate values backwards:
-    >>> zzubzzif = f(0, -10, -1)
-    >>> list(zzubzzif)
+    >>> list(f(0, -10, -1))
     ['FizzBuzz', '-1', '-2', 'Fizz', '-4', 'Buzz', 'Fizz', '-7', '-8', 'Fizz']
 
-    Call with very large values for start, stop, and step:
-    >>> gigafizzbuzz = f(1_000_000_000, 6_000_000_000, 1_000_000_000)
-    >>> list(gigafizzbuzz)
+    Start, stop, and step can be arbitrarily large integers:
+    >>> list(f(1_000_000_000, 6_000_000_000, 1_000_000_000))
     ['Buzz', 'Buzz', 'FizzBuzz', 'Buzz', 'Buzz']
 
     Call with stop=None to return an infinite generator:
     >>> endless = f(start=0, stop=None, step=1)
     >>> next(endless)
     'FizzBuzz'
-    >>> [next(endless) for x in range(6)]
-    ['1', '2', 'Fizz', '4', 'Buzz', 'Fizz']
+    >>> next(endless)
+    '1'
+    >>> next(endless)
+    '2'
+    >>> next(endless)
+    'Fizz'
+    >>> next(endless)
+    '4'
+    >>> next(endless)
+    'Buzz'
     """
 
     __slots__ = ("fizz", "buzz")
