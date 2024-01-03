@@ -77,14 +77,19 @@ if __name__ == "__main__":
     import argparse
 
     parsed = argparse.ArgumentParser()
-    parsed.description = "Print results of the FizzBuzz game."
+    parsed.description = "Print numbers from [start] to [step], \
+    in steps of size [step], but for multiples of 3 print 'Fizz' \
+    instead of the number, and for the multiples of 5 print 'Buzz'. \
+    For numbers which are multiples of both 3 and 5 print 'FizzBuzz'."
+
     arg = parsed.add_argument
-    arg("start", nargs="?", default=1, type=int, help="start at this number")
-    arg("stop", nargs="?", default=101, type=int, help="stop before this number")
-    arg("step", nargs="?", default=1, type=int, help="slice interval")
-    arg("--fizz", default=3, type=int, help="'fizz' interval")
-    arg("--buzz", default=5, type=int, help="'buzz' interval")
+    arg("start", nargs="?", default=1, type=int)
+    arg("stop", nargs="?", default=101, type=int)
+    arg("step", nargs="?", default=1, type=int)
+    arg("--fizz", default=3, type=int,help="'Fizz' multiplier (default is 3)")
+    arg("--buzz", default=5, type=int,help="'Buzz' multiplier (default is 5)")
     parsed = parsed.parse_args()
 
     fountain = Fountain(parsed.fizz, parsed.buzz)
-    print(*fountain(parsed.start, parsed.stop, parsed.step))
+    results = fountain(parsed.start, parsed.stop, parsed.step)
+    print(*results)
