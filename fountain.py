@@ -15,18 +15,11 @@ class Fountain:
     (3, 5)
 
     Call a Fountain to return a generator:
-    >>> afew = f(start=0, stop=10, step=1)
-    >>> type(afew)
+    >>> first10 = f(start=0, stop=10, step=1)
+    >>> type(first10)
     <class 'generator'>
-    >>> list(afew)
+    >>> list(first10)
     ['FizzBuzz', '1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz']
-
-    Call with stop=None to return an endless generator:
-    >>> endless = f(start=0, stop=None, step=1)
-    >>> next(endless)
-    'FizzBuzz'
-    >>> [next(endless) for x in range(6)]
-    ['1', '2', 'Fizz', '4', 'Buzz', 'Fizz']
 
     Call with step=3 to generate only every 3rd result:
     >>> thirds = f(start=0, stop=15, step=3)
@@ -42,6 +35,13 @@ class Fountain:
     >>> gigafizzbuzz = f(1_000_000_000, 6_000_000_000, 1_000_000_000)
     >>> list(gigafizzbuzz)
     ['Buzz', 'Buzz', 'FizzBuzz', 'Buzz', 'Buzz']
+
+    Call with stop=None to return an infinite generator:
+    >>> endless = f(start=0, stop=None, step=1)
+    >>> next(endless)
+    'FizzBuzz'
+    >>> [next(endless) for x in range(6)]
+    ['1', '2', 'Fizz', '4', 'Buzz', 'Fizz']
     """
 
     __slots__ = ("fizz", "buzz")
