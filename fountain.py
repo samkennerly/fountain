@@ -55,11 +55,6 @@ class Fountain:
         self.fizz = int(fizz)
         self.buzz = int(buzz)
 
-    @property
-    def shape(self):
-        """(int, int): Fizz and Buzz intervals."""
-        return (self.fizz, self.buzz)
-
     def __call__(self, start=1, stop=101, step=1):
         """Generator[str]: FizzBuzz values for selected range."""
         fizz = self.fizz
@@ -76,6 +71,11 @@ class Fountain:
     def __repr__(self):
         """str: Reproducible representation."""
         return f"{type(self).__name__}(fizz={self.fizz}, buzz={self.buzz})"
+
+    @property
+    def shape(self):
+        """(int, int): Fizz and Buzz intervals."""
+        return (self.fizz, self.buzz)
 
 
 if __name__ == "__main__":
