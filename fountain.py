@@ -7,7 +7,6 @@ class Fountain:
     """
     Infinite version of the FizzBuzz game.
 
-
     Create a new Fountain:
     >>> f = Fountain(fizz=3, buzz=5)
     >>> f
@@ -15,7 +14,7 @@ class Fountain:
     >>> f.shape
     (3, 5)
 
-    Call to return a generator:
+    Call a Fountain to return a generator:
     >>> afew = f(start=0, stop=10, step=1)
     >>> type(afew)
     <class 'generator'>
@@ -29,15 +28,20 @@ class Fountain:
     >>> [next(endless) for x in range(6)]
     ['1', '2', 'Fizz', '4', 'Buzz', 'Fizz']
 
-    Call with step=3 to print every 3rd result:
+    Call with step=3 to generate only every 3rd result:
     >>> thirds = f(start=0, stop=15, step=3)
     >>> list(thirds)
     ['FizzBuzz', 'Fizz', 'Fizz', 'Fizz', 'Fizz']
 
-    Call with very large steps:
-    >>> gigafizzbuzz = f(0, 5_000_000_000, 1_000_000_000)
+    Call with step < 0 to generate values backwards:
+    >>> zzubzzif = f(0, -10, -1)
+    >>> list(zzubzzif)
+    ['FizzBuzz', '-1', '-2', 'Fizz', '-4', 'Buzz', 'Fizz', '-7', '-8', 'Fizz']
+
+    Call with very large values for start, stop, and step:
+    >>> gigafizzbuzz = f(1_000_000_000, 6_000_000_000, 1_000_000_000)
     >>> list(gigafizzbuzz)
-    ['FizzBuzz', 'Buzz', 'Buzz', 'FizzBuzz', 'Buzz']
+    ['Buzz', 'Buzz', 'FizzBuzz', 'Buzz', 'Buzz']
     """
 
     __slots__ = ("fizz", "buzz")
