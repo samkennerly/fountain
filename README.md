@@ -1,6 +1,6 @@
 # fountain
 
-[Pure Python] example of an infinite [FizzBuzz] which can be [sliced].
+[Pure Python] example of an infinite [FizzBuzz] generator.
 
 <img
   alt="The Fountain"
@@ -9,35 +9,50 @@
 
 [Pure Python]: https://stackoverflow.com/questions/45976946/what-is-pure-python
 [FizzBuzz]: https://blog.codinghorror.com/why-cant-programmers-program/
-[sliced]: https://docs.python.org/3/glossary.html#term-slice
 
 
 ## abstract
 
-Fountain is an example of several Python tricks:
+The [classic FizzBuzz] problem is:
+<blockquote>
+Write a program that prints the numbers from 1 to 100. But for multiples of three print "Fizz" instead of the number and for the multiples of five print "Buzz". For numbers which are multiples of both three and five print "FizzBuzz".
+</blockquote>
+
+[classic FizzBuzz]: https://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/
+
+Fountain objects generalize this problem such that Fizz and Buzz multiples can be any integers, and the interval "1 to 100" can be any finite [range] or infinite [count].
+
+[range]: https://docs.python.org/3/library/stdtypes.html?highlight=range#range
+[count]: https://docs.python.org/3/library/itertools.html#itertools.count
+
+The [fountain.py] module is also a tutorial for some handy Python tricks:
 
 - create a [callable] class
 - run a module [as a script]
 - run automated tests with [doctest]
 - use [generators] to do [lazy evaluation]
+- parse command-line arguments with [argparse]
 
+[fountain.py]: fountain.py
 [callable]: https://docs.python.org/3/reference/datamodel.html#object.__call__
 [as a script]: https://docs.python.org/3/library/__main__.html#idiomatic-usage
 [doctest]: https://docs.python.org/3/library/doctest.html
 [generators]: https://docs.python.org/3/howto/functional.html#generators
 [lazy evaluation]: https://en.wikipedia.org/wiki/Lazy_evaluation
+[argparse]: https://docs.python.org/3/library/argparse.html#argumentparser-objects
 
 
 # UNDER CONSTRUCTION
 
 
+
+
 ## basics
 
-A `Fountain` object acts like a tuple of strings, except...
 
-- `Fountain` objects have no `len()`.
+??? command-line help menu ???
+
 - [Calling] a `Fountain` object returns a generator.
-- Slices must have an endpoint. `[1:]` will raise an error.
 - Negative-index elements like `[-3]` count backwards from 0.
 
 [Calling]: https://docs.python.org/3/reference/datamodel.html#object.__call__
