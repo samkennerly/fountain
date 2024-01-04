@@ -27,7 +27,7 @@ class Fountain:
     >>> list(first10)
     []
 
-    calling the same object again returns a new generator:
+    Calling the same object again returns a new generator:
     >>> second10 = f(start=10, stop=20, step=1)
     >>> list(second10)
     ['Buzz', '11', 'Fizz', '13', '14', 'FizzBuzz', '16', '17', 'Fizz', '19']
@@ -72,15 +72,11 @@ class Fountain:
         self.buzz = int(buzz)
 
     def __call__(self, start=1, stop=101, step=1):
-        """Generator[str]: FizzBuzz values for selected range."""
+        """Generator[str]: FizzBuzz results for selected range."""
         fizz = self.fizz
         buzz = self.buzz
 
-        if stop is None:
-            steps = count(start, step)
-        else:
-            steps = range(start, stop, step)
-
+        steps = count(start, step) if (stop is None) else range(start, stop, step)
         for n in steps:
             yield ("Fizz" * (not n % fizz) + "Buzz" * (not n % buzz)) or str(n)
 
