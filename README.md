@@ -20,7 +20,7 @@ Write a program that prints the numbers from 1 to 100. But for multiples of thre
 
 [classic FizzBuzz]: https://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/
 
-Fountain objects generalize this problem: Fizz and Buzz multiples can be any integers, and "from 1 to 100" can be replaced by any finite [range] or infinite [count].
+Fountain objects generalize this problem: Fizz and Buzz multiples can be any nonzero integers, and "from 1 to 100" can be replaced by any finite [range] or infinite [count].
 
 [range]: https://docs.python.org/3/library/stdtypes.html?highlight=range#range
 [count]: https://docs.python.org/3/library/itertools.html#itertools.count
@@ -137,7 +137,7 @@ The generator is done generating elements, but...
 []
 ```
 
-calling the same object again returns a new generator:
+Calling the same object again returns a new generator:
 ```python
 >>> second10 = f(start=10, stop=20, step=1)
 >>> list(second10)
