@@ -14,39 +14,55 @@ class Fountain:
     >>> f.shape
     (3, 5)
 
-    Call a Fountain to return a generator:
+    Call to return a generator:
     >>> first10 = f(start=0, stop=10, step=1)
     >>> type(first10)
     <class 'generator'>
+
+    Make a list from the generated values:
     >>> list(first10)
     ['FizzBuzz', '1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz']
 
-    Call with step=3 to generate only every 3rd result:
-    >>> list(f(start=0, stop=15, step=3))
-    ['FizzBuzz', 'Fizz', 'Fizz', 'Fizz', 'Fizz']
+    The generator is done generating elements, but...
+    >>> list(first10)
+    []
 
-    Call with step < 0 to generate values backwards:
-    >>> list(f(0, -10, -1))
-    ['FizzBuzz', '-1', '-2', 'Fizz', '-4', 'Buzz', 'Fizz', '-7', '-8', 'Fizz']
+    calling the same object again returns a new generator:
+    >>> second10 = f(start=10, stop=20, step=1)
+    >>> list(second10)
+    ['Buzz', '11', 'Fizz', '13', '14', 'FizzBuzz', '16', '17', 'Fizz', '19']
 
-    Start, stop, and step can be arbitrarily large integers:
-    >>> list(f(1_000_000_000, 6_000_000_000, 1_000_000_000))
-    ['Buzz', 'Buzz', 'FizzBuzz', 'Buzz', 'Buzz']
+    Arguments can be input with or without keywords:
+    >>> third10 = f(20, 30, 1)
+    >>> list(third10)
+    ['Buzz', 'Fizz', '22', '23', 'Fizz', 'Buzz', '26', 'Fizz', '28', '29']
 
-    Call with stop=None to return an infinite generator:
-    >>> endless = f(start=0, stop=None, step=1)
-    >>> next(endless)
-    'FizzBuzz'
-    >>> next(endless)
-    '1'
-    >>> next(endless)
-    '2'
-    >>> next(endless)
-    'Fizz'
-    >>> next(endless)
-    '4'
-    >>> next(endless)
+    Call with step=3 to generate every 3rd result:
+    >>> list(f(start=0, stop=20, step=3))
+    ['FizzBuzz', 'Fizz', 'Fizz', 'Fizz', 'Fizz', 'FizzBuzz', 'Fizz']
+
+    Call with negative start, stop, and/or step to generate backwards:
+    >>> list(f(-1, -10, -1))
+    ['-1', '-2', 'Fizz', '-4', 'Buzz', 'Fizz', '-7', '-8', 'Fizz']
+
+    Call with very large arguments:
+    >>> list(f(1_000_000_001, 10_000_000_000, 2_000_000_000))
+    ['1000000001', '3000000001', 'Fizz', '7000000001', '9000000001']
+
+    Call with `stop=None` to return an infinite generator:
+    >>> gigafizzbuzz = f(1_000_000_000, stop=None, step=1)
+    >>> next(gigafizzbuzz)
     'Buzz'
+    >>> next(gigafizzbuzz)
+    '1000000001'
+    >>> next(gigafizzbuzz)
+    'Fizz'
+    >>> next(gigafizzbuzz)
+    '1000000003'
+    >>> next(gigafizzbuzz)
+    '1000000004'
+    >>> next(gigafizzbuzz)
+    'FizzBuzz'
     """
 
     __slots__ = ("fizz", "buzz")
