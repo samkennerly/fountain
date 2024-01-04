@@ -20,15 +20,15 @@ Write a program that prints the numbers from 1 to 100. But for multiples of thre
 
 [classic FizzBuzz]: https://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/
 
-Fountain objects generalize this problem such that Fizz and Buzz multiples can be any integers, and the interval "1 to 100" can be any finite [range] or infinite [count].
+Fountain objects generalize this problem: Fizz and Buzz multiples can be any integers, and "from 1 to 100" can be replaced by any finite [range] or infinite [count].
 
 [range]: https://docs.python.org/3/library/stdtypes.html?highlight=range#range
 [count]: https://docs.python.org/3/library/itertools.html#itertools.count
 
-The [fountain.py] module also demonstrates some other Python tricks:
+The [fountain.py] module also demonstrates some popular Python tricks:
 
 - make objects [callable]
-- run a module [as a script]
+- run a [module] as a [script]
 - run automated tests with [doctest]
 - use [slots] to declare class attributes
 - use [generators] to do [lazy evaluation]
@@ -36,7 +36,8 @@ The [fountain.py] module also demonstrates some other Python tricks:
 
 [fountain.py]: fountain.py
 [callable]: https://docs.python.org/3/reference/datamodel.html#object.__call__
-[as a script]: https://docs.python.org/3/library/__main__.html#idiomatic-usage
+[module]: https://docs.python.org/3/tutorial/modules.html
+[script]: https://docs.python.org/3/library/__main__.html#idiomatic-usage
 [doctest]: https://docs.python.org/3/library/doctest.html
 [slots]: https://wiki.python.org/moin/UsingSlots
 [generators]: https://docs.python.org/3/howto/functional.html#generators
@@ -68,17 +69,18 @@ from fountain import Fountain
 fizzbuzz = Fountain(fizz=3, buzz=5)
 ```
 
-Call a Fountain to return a generator:
+Call the object with `start`, `stop`, and/or `step` inputs to return a generator:
 ```python
 for x in fizzbuzz(start=1, stop=10, step=1):
   print(x)
 ```
 
-Call again to generate new values with the same `fizz` and `buzz` multiples:
+Call it again to return a new generator with the same `fizz` and `buzz` multiples:
 ```python
-for x in fizzbuzz(1, 101, 1):
+for x in fizzbuzz(start=10, stop=100, step=2):
   print(x)
 ```
+
 
 ### run all tests
 
@@ -95,21 +97,20 @@ python3 -m doctest -v fountain.py
 
 ## contents
 
-[fountain.py] is a 1-page Python [module].
+[fountain.py] is a single-page module.
 
 [fountain.py]: fountain.py
-[module]: https://docs.python.org/3/tutorial/modules.html
 
 
 ## dependencies
 
-Python 3 is the only dependency.
+- Python 3.9.1+
 
 
 ## examples
 
 Create a new Fountain:
-```text
+```python
 >>> f = Fountain(fizz=3, buzz=5)
 >>> f
 Fountain(fizz=3, buzz=5)
@@ -118,71 +119,71 @@ Fountain(fizz=3, buzz=5)
 ```
 
 Call it to return a generator:
-```text
+```python
 >>> first10 = f(start=0, stop=10, step=1)
 >>> type(first10)
 <class 'generator'>
 ```
 
 Make a list from the generated values:
-```text
+```python
 >>> list(first10)
 ['FizzBuzz', '1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz']
 ```
 
-The generator is now exhausted and cannot be re-used.
-```text
+The generator is done generating elements, but...
+```python
 >>> list(first10)
 []
 ```
 
-Call the Fountain again to return a new generator:
-```text
+calling the same object again returns a new generator:
+```python
 >>> second10 = f(start=10, stop=20, step=1)
 >>> list(second10)
 ['Buzz', '11', 'Fizz', '13', '14', 'FizzBuzz', '16', '17', 'Fizz', '19']
 ```
 
-The `start`, `stop`, and `step` arguments can be input with or without keywords:
-```text
+Arguments can be input with or without keywords:
+```python
 >>> third10 = f(20, 30, 1)
 >>> list(third10)
 ['Buzz', 'Fizz', '22', '23', 'Fizz', 'Buzz', '26', 'Fizz', '28', '29']
 ```
 
-Call with step=3 to generate every 3rd result:
-```text
+Call with `step=3` to generate every 3rd result:
+```python
 >>> list(f(start=0, stop=20, step=3))
 ['FizzBuzz', 'Fizz', 'Fizz', 'Fizz', 'Fizz', 'FizzBuzz', 'Fizz']
 ```
 
-Call with a negative `step` to generate values backwards:
-```text
->>> list(f(start=9, stop=0, step=-1))
-['Fizz', '8', '7', 'Fizz', 'Buzz', '4', 'Fizz', '2', '1']
+Call with negative `start`, `stop`, and/or `step` to generate backwards:
+```python
+>>> list(f(-1, -10, -1))
+['-1', '-2', 'Fizz', '-4', 'Buzz', 'Fizz', '-7', '-8', 'Fizz']
 ```
 
-Call with large and/or negative integers:
-```text
->>> list(f(-3, -1_000_000_000, -300_000_000))
-['Fizz', 'Fizz', 'Fizz', 'Fizz']
+Call with very large arguments:
+```python
+>>> list(f(1_000_000_001, 10_000_000_000, 2_000_000_000))
+['1000000001', '3000000001', 'Fizz', '7000000001', '9000000001']
 ```
 
-Call with stop=None to return an infinite generator:
-```text
->>> endless = f(start=0, stop=None, step=1)
->>> next(endless)
-'FizzBuzz'
->>> next(endless)
-'1'
->>> next(endless)
-'2'
->>> next(endless)
-'Fizz'
->>> next(endless)
-'4'
->>> next(endless)
+Call with `stop=None` to return an infinite generator:
+```python
+>>> gigafizzbuzz = f(1_000_000_000, stop=None, step=1)
+>>> next(gigafizzbuzz)
 'Buzz'
+>>> next(gigafizzbuzz)
+'1000000001'
+>>> next(gigafizzbuzz)
+'Fizz'
+>>> next(gigafizzbuzz)
+'1000000003'
+>>> next(gigafizzbuzz)
+'1000000004'
+>>> next(gigafizzbuzz)
+'FizzBuzz'
 ```
 
 ## faq
