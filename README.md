@@ -46,47 +46,50 @@ The [fountain.py] module also demonstrates some other Python tricks:
 
 ## basics
 
-To run [fountain.py] as a script, open a terminal and type
+### run as a script
+
+Open a terminal and enter:
 ```sh
 python3 fountain.py
 ```
+[fountain.py]: fountain.py
 
-To see the help menu and command-line arguments, run `python3 fountain.py --help`.
-```text
-usage: fountain.py [-h] [--fizz FIZZ] [--buzz BUZZ] [start] [stop] [step]
-
-Print numbers from [start] to [stop], in steps of size [step], but for multiples of 3
-print 'Fizz' instead of the number, and for the multiples of 5 print 'Buzz'. For
-numbers which are multiples of both 3 and 5 print 'FizzBuzz'.
-
-positional arguments:
-  start
-  stop
-  step
-
-optional arguments:
-  -h, --help   show this help message and exit
-  --fizz FIZZ  Fizz multiplier (default is 3)
-  --buzz BUZZ  Buzz multiplier (default is 5)
+To see the help menu and command-line arguments, run:
+```sh
+python3 fountain.py --help
 ```
 
-The `Fountain` class can also be imported into Python code:
+### use as a class
+
+Import the `Fountain` class and construct a new object:
 ```python
 from fountain import Fountain
 
 fizzbuzz = Fountain(fizz=3, buzz=5)
 ```
 
-Call a `Fountain` to return a generator:
+Call a Fountain to return a generator:
 ```python
 for x in fizzbuzz(start=1, stop=10, step=1):
   print(x)
 ```
 
-Call it again to generate new values with the same `fizz` and `buzz` multiples:
+Call again to generate new values with the same `fizz` and `buzz` multiples:
 ```python
 for x in fizzbuzz(1, 101, 1):
   print(x)
+```
+
+### run all tests
+
+Open a terminal and enter:
+```sh
+python3 -m doctest fountain.py
+```
+
+To see all test results, run `doctest` with the `--verbose` option:
+```sh
+python3 -m doctest -v fountain.py
 ```
 
 
@@ -100,91 +103,86 @@ for x in fizzbuzz(1, 101, 1):
 
 ## dependencies
 
-- Python 3
-
-Tested with Python versions 3.5.9, 3.6.9, 3.7.5, 3.8.0.
+Python 3 is the only dependency.
 
 
 ## examples
 
-Create a new `Fountain` object.
-```
->>> soda = Fountain(fizz=2, buzz=3)
->>> soda
-Fountain(fizz=2, buzz=3)
->>> soda.shape
-(2, 3)
-```
-
-`Fountain` is almost a `Sequence`, but with one big difference:
-```
->>> len(soda)
-Traceback (most recent call last):
-...
-ZeroDivisionError: FizzBuzz forever
+Create a new Fountain:
+```text
+>>> f = Fountain(fizz=3, buzz=5)
+>>> f
+Fountain(fizz=3, buzz=5)
+>>> f.shape
+(3, 5)
 ```
 
-Get values one at a time with square brackets.
-```
->>> soda[12]
-'FizzBuzz'
->>> soda[-3]
-'Buzz'
->>> soda[6_000_000_000_000_000]
-'FizzBuzz'
->>> soda[6_000_000_000_000_001]
-'6000000000000001'
-```
-
-Slicing with a valid endpoint returns a tuple of strings.
-```
->>> soda[ :6]
-('FizzBuzz', '1', 'Fizz', 'Buzz', 'Fizz', '5')
->>> soda[-6 : 0]
-('FizzBuzz', '-5', 'Fizz', 'Buzz', 'Fizz', '-1')
->>> soda[100 : 0 : -13]
-('Fizz', 'Buzz', 'Fizz', '61', 'FizzBuzz', '35', 'Fizz', 'Buzz')
->>> soda[int(1e12) + 1 : int(6e12) : int(1e12)]
-('1000000000001', 'Buzz', '3000000000001', '4000000000001', 'Buzz')
-```
-
-Slicing with no endpoint is an error.
-```
->>> soda[1:]
-Traceback (most recent call last):
-...
-ValueError: endless slice
-```
-
-Calling a `Fountain` returns a generator.
-```
->>> afew = soda(start=10,stop=2,step=-1)
->>> type(afew)
+Call it to return a generator:
+```text
+>>> first10 = f(start=0, stop=10, step=1)
+>>> type(first10)
 <class 'generator'>
->>> ' '.join(afew)
-'Fizz Buzz Fizz 7 FizzBuzz 5 Fizz Buzz'
->>> ' '.join(afew)
-''
 ```
 
-Calling with stop=None returns an endless generator.
+Make a list from the generated values:
+```text
+>>> list(first10)
+['FizzBuzz', '1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz']
 ```
->>> forever = soda(start=1,stop=None)
->>> next(forever)
+
+The generator is now exhausted and cannot be re-used.
+```text
+>>> list(first10)
+[]
+```
+
+Call the Fountain again to return a new generator:
+```text
+>>> second10 = f(start=10, stop=20, step=1)
+>>> list(second10)
+['Buzz', '11', 'Fizz', '13', '14', 'FizzBuzz', '16', '17', 'Fizz', '19']
+```
+
+The `start`, `stop`, and `step` arguments can be input with or without keywords:
+```text
+>>> third10 = f(20, 30, 1)
+>>> list(third10)
+['Buzz', 'Fizz', '22', '23', 'Fizz', 'Buzz', '26', 'Fizz', '28', '29']
+```
+
+Call with step=3 to generate every 3rd result:
+```text
+>>> list(f(start=0, stop=20, step=3))
+['FizzBuzz', 'Fizz', 'Fizz', 'Fizz', 'Fizz', 'FizzBuzz', 'Fizz']
+```
+
+Call with a negative `step` to generate values backwards:
+```text
+>>> list(f(start=9, stop=0, step=-1))
+['Fizz', '8', '7', 'Fizz', 'Buzz', '4', 'Fizz', '2', '1']
+```
+
+Call with large and/or negative integers:
+```text
+>>> list(f(-3, -1_000_000_000, -300_000_000))
+['Fizz', 'Fizz', 'Fizz', 'Fizz']
+```
+
+Call with stop=None to return an infinite generator:
+```text
+>>> endless = f(start=0, stop=None, step=1)
+>>> next(endless)
+'FizzBuzz'
+>>> next(endless)
 '1'
->>> [ next(forever) for x in range(5) ]
-['Fizz', 'Buzz', 'Fizz', '5', 'FizzBuzz']
-```
-
-Beware of infinite loops when iterating over a Fountain.
-Converting a `Fountain` to a `list`, `set`, `tuple`, etc. takes forever.
-This example is slower than calling soda[9001], but it is safe:
-```
->>> for i,x in enumerate(soda):
-...     if i > 9000:
-...         break
->>> x
-'9001'
+>>> next(endless)
+'2'
+>>> next(endless)
+'Fizz'
+>>> next(endless)
+'4'
+>>> next(endless)
+'Buzz'
 ```
 
 ## faq
